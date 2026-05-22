@@ -73,7 +73,6 @@ const HeroBadge = () => {
       shadow-lg
       "
     >
-
       {/* Animated Dot */}
       <motion.div
         animate={{
@@ -96,8 +95,7 @@ const HeroBadge = () => {
       {/* Typewriter Text */}
       <span
         className="
-        text-[#8B0000]
-        dark:text-[#FF4D6D]
+        text-[#8B0000] dark:text-[#cf0e31]
         text-[10px]
         sm:text-xs
         font-bold

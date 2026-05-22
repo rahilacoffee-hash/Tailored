@@ -69,8 +69,8 @@ const Navbar = () => {
     },
 
     {
-      name: "Vision",
-      href: "#vision",
+      name: "Testimonials",
+      href: "#testimonials",
     },
 
     {
@@ -78,10 +78,7 @@ const Navbar = () => {
       href: "#faq",
     },
 
-    {
-      name: "Contact",
-      href: "#contact",
-    },
+    
   ];
 
   return (
@@ -322,7 +319,8 @@ const Navbar = () => {
 
           {/* DESKTOP CTA */}
 
-          <motion.button
+          <motion.a
+            href="#waitlist"
             whileHover={{
               scale: 1.05,
             }}
@@ -348,7 +346,7 @@ const Navbar = () => {
             "
           >
             Join Waitlist
-          </motion.button>
+          </motion.a>
 
           {/* HAMBURGER */}
 
@@ -541,7 +539,11 @@ const Navbar = () => {
 
               {/* MOBILE CTA */}
 
-              <motion.button
+              <motion.a
+                href="#waitlist"
+                onClick={() =>
+                  setMenuOpen(false)
+                }
                 initial={{
                   opacity: 0,
                   y: 30,
@@ -564,13 +566,14 @@ const Navbar = () => {
                 py-4
                 rounded-full
                 font-semibold
+                text-center
                 shadow-[0_10px_35px_rgba(225,29,72,0.3)]
                 transition-all
                 duration-300
                 "
               >
                 Join Waitlist
-              </motion.button>
+              </motion.a>
             </div>
           </motion.div>
         )}
