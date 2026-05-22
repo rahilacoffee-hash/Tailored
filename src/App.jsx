@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
-
 import Loader from "./Component/Loader";
 import Navbar from "./Component/Navbar";
 import Hero from "./Component/Hero";
@@ -9,46 +8,40 @@ import AppPreview from "./Component/AppPreview";
 import HowItWorks from "./Component/HowItWorks";
 import Benefits from "./Component/Benefits";
 import FutureVision from "./Component/Futurevision";
+import Testimonials from "./Component/Testimonials";
+import FAQ from "./Component/FAQ";
+import Waitlist from "./Component/WaitList";
 
 function App() {
-  const [darkMode, setDarkMode] = useState(() => {
+    const [darkMode, setDarkMode] = useState(() => {
     return localStorage.getItem("theme") === "dark";
   });
 
-  const [loading, setLoading] = useState(true);
-
-  /* DARK MODE */
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
+
+      localStorage.setItem(
+        "theme",
+        "dark"
+      );
     } else {
       document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
+
+      localStorage.setItem(
+        "theme",
+        "light"
+      );
     }
   }, [darkMode]);
+  let [loading, setLoading] = useState(true);
 
-  /* PREMIUM LOADER (REAL LOAD + MIN TIME) */
   useEffect(() => {
-    const minTime = new Promise((resolve) =>
-      setTimeout(resolve, 1200)
-    );
-
-    const pageLoad = new Promise((resolve) => {
-      if (document.readyState === "complete") {
-        resolve();
-      } else {
-        window.addEventListener("load", resolve);
-      }
-    });
-
-    Promise.all([minTime, pageLoad]).then(() => {
+    let timer = setTimeout(() => {
       setLoading(false);
-    });
+    }, 3100);
 
-    return () => {
-      window.removeEventListener("load", () => {});
-    };
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -60,16 +53,19 @@ function App() {
       {!loading && (
         <main className="bg-[#FFF9F5] overflow-hidden">
           <Navbar />
-          <Hero />
-          <Features />
-          <AppPreview />
-          <HowItWorks />
-          <Benefits />
-          <FutureVision />
+          <Hero/>
+          <Features/>
+          <AppPreview/>
+          <HowItWorks/>
+          <Benefits/>
+          <FutureVision/>
+          <Testimonials/>
+          <FAQ/>
+          <Waitlist/>
         </main>
       )}
     </>
   );
 }
 
-export default App; 
+export default App;
