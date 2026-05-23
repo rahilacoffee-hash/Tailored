@@ -44,6 +44,13 @@ const AppPreview = () => {
             <span className="text-[#cf0e31] dark:text-[#8B0000]"> in Action</span>
           </h2>
           </motion.div>
+
+          <div className='grid md:grid-cols-4 lg:h-112 '>
+              <img src='Createaccount.png'/>
+              <img src='measurement.png'/>
+              <img src='TrackOrders.png'/>
+              <img src='MonitorPayments.png'/>
+          </div>
           </div>
           </section>
   )

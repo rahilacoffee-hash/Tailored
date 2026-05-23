@@ -17,7 +17,7 @@ const steps = [
 
     icon: <FiUser />,
 
-    image: "ChatGPT Image May 20, 2026, 12_46_24 AM.png",
+    image: "Createaccount.png",
   },
 
   {
@@ -29,7 +29,7 @@ const steps = [
 
     icon: <FiClipboard />,
 
-    image: "ChatGPT Image May 20, 2026, 12_46_24 AM.png",
+    image: "measurement.png",
   },
 
   {
@@ -41,7 +41,7 @@ const steps = [
 
     icon: <FiCreditCard />,
 
-    image: "ChatGPT Image May 20, 2026, 12_46_24 AM.png",
+    image: "TrackOrders.png",
   },
 
   {
@@ -53,7 +53,7 @@ const steps = [
 
     icon: <FiTrendingUp />,
 
-    image: "ChatGPT Image May 20, 2026, 12_46_24 AM.png",
+    image: "MonitorPayments.png",
   },
 ];
 
@@ -447,12 +447,12 @@ const HowItWorks = () => {
               w-[300px]
               sm:w-[340px]
               h-[620px]
-              sm:h-[700px]
+              sm:h-[600px]
               rounded-[45px]
               border-[10px]
               border-black
               dark:border-white
-            bg-[#FFF9F5]
+            bg-gray-700
               dark:bg-black
               overflow-hidden
               shadow-[0_40px_100px_rgba(0,0,0,0.25)]
