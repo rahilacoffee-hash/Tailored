@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import HeroBadge from "../Component/HeroBadge";
 import DemoBtn from "./WatchDemoBtn";
+import MotionCounter from "./MotionCounter";
 
 const heroSlides = [
   {
@@ -12,6 +13,29 @@ const heroSlides = [
   {
     type: "tailor",
     image: "/tailor-using-app1.png",
+  },
+];
+
+const floatingCards = [
+  {
+    title: "New Customer",
+    value: "Esther Johnson",
+    top: "18%",
+    left: "0%",
+  },
+
+  {
+    title: "Payment Received",
+    value: "₦120,000",
+    top: "70%",
+    right: "0%",
+  },
+
+  {
+    title: "New Order",
+    value: "Agbada Premium",
+    top: "50%",
+    left: "-5%",
   },
 ];
 
@@ -30,6 +54,13 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const statsRef = useRef(null);
+
+const isInView = useInView(statsRef, {
+  once: false,
+  amount: 0.5,
+});
+
   return (
     <section
       className="
@@ -42,42 +73,56 @@ const Hero = () => {
       duration-500
       flex
       items-center
-      pt-32
-      lg:pt-19
       "
     >
-      {/* DISCO LIGHTING */}
+      {/* GRID */}
+
+      <div
+        className="
+        absolute
+        inset-0
+        opacity-[0.04]
+        "
+        style={{
+          backgroundImage: "radial-gradient(#E11D48 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
+        }}
+      />
+
+      {/* GLOW 1 */}
 
       <motion.div
         animate={{
-          opacity: [0.2, 0.45, 0.2],
+          opacity: [0.25, 0.45, 0.25],
           scale: [1, 1.2, 1],
-          x: [0, 60, 0],
-          y: [0, -40, 0],
+          x: [0, 80, 0],
+          y: [0, -50, 0],
         }}
         transition={{
-          duration: 10,
+          duration: 12,
           repeat: Infinity,
           ease: "easeInOut",
         }}
         className="
         absolute
         top-[-200px]
-        left-[-100px]
-        w-[500px]
-        h-[500px]
+        left-[-150px]
+        w-[550px]
+        h-[550px]
         bg-[#E11D48]/20
-        blur-3xl
+        blur-[140px]
         rounded-full
         "
       />
+
+      {/* GLOW 2 */}
 
       <motion.div
         animate={{
           opacity: [0.1, 0.3, 0.1],
           scale: [1, 1.1, 1],
           x: [0, -50, 0],
-          y: [0, 50, 0],
+          y: [0, 60, 0],
         }}
         transition={{
           duration: 14,
@@ -86,12 +131,12 @@ const Hero = () => {
         }}
         className="
         absolute
-        bottom-[-200px]
-        right-[-100px]
-        w-[450px]
-        h-[450px]
+        bottom-[-250px]
+        right-[-150px]
+        w-[500px]
+        h-[500px]
         bg-blue-400/10
-        blur-3xl
+        blur-[140px]
         rounded-full
         "
       />
@@ -107,7 +152,7 @@ const Hero = () => {
         top-1/2
         -translate-x-1/2
         -translate-y-1/2
-        w-[500px]
+        w-[650px]
         opacity-[0.03]
         pointer-events-none
         select-none
@@ -124,7 +169,7 @@ const Hero = () => {
         top-1/2
         -translate-x-1/2
         -translate-y-1/2
-        w-[500px]
+        w-[650px]
         opacity-[0.03]
         pointer-events-none
         select-none
@@ -133,20 +178,22 @@ const Hero = () => {
         "
       />
 
-      {/* CONTENT */}
+      {/* MAIN */}
 
       <div
         className="
+        relative
+        z-10
         max-w-7xl
         mx-auto
         px-6
         lg:px-12
+        pt-36
+        pb-24
         grid
         lg:grid-cols-2
-        gap-16
+        gap-20
         items-center
-        relative
-        z-10
         "
       >
         {/* LEFT */}
@@ -154,14 +201,14 @@ const Hero = () => {
         <motion.div
           initial={{
             opacity: 0,
-            y: 40,
+            y: 50,
           }}
           animate={{
             opacity: 1,
             y: 0,
           }}
           transition={{
-            duration: 0.8,
+            duration: 0.9,
           }}
         >
           {/* BADGE */}
@@ -178,61 +225,63 @@ const Hero = () => {
             inline-flex
             items-center
             gap-2
-            bg-red-50
-            dark:bg-red-900/5
-            border
-            border-red-100
-            dark:border-red-500/5
-            px-4
-            py-2
+            px-5
+            py-2.5
             rounded-full
+            bg-white/70
+            dark:bg-white/[0.04]
+            border
+            border-black/5
+            dark:border-white/10
+            backdrop-blur-xl
+            shadow-lg
             "
           >
             <HeroBadge />
           </motion.div>
 
-          {/* HEADING */}
+          {/* TITLE */}
 
           <h1
             className="
+            mt-8
             text-5xl
             sm:text-6xl
             lg:text-7xl
             font-black
-            leading-[0.95]
+            leading-[0.92]
             tracking-tight
             text-black
             dark:text-white
-            mt-8
             "
           >
-            The Smartest Way
+            Run Your
             <span
               className="
               block
-              text-[#8B0000] dark:text-[#cf0e31]
-              mt-3
+              text-[#8B0000]
+              dark:text-[#cf0e31]
               "
             >
-              To Run Your
+              Tailoring Business
             </span>
-            Tailoring Business.
+            Like A Modern Brand.
           </h1>
 
           {/* TEXT */}
 
           <p
             className="
+            mt-8
+            max-w-xl
             text-lg
             leading-relaxed
             text-gray-600
             dark:text-gray-400
-            mt-8
-            max-w-xl
             "
           >
-            Manage customers, measurements, orders and payments with one modern
-            platform built for African fashion designers and tailors.
+            Manage customers, measurements, payments and orders with one premium
+            platform built for African tailors and fashion designers.
           </p>
 
           {/* BUTTONS */}
@@ -245,27 +294,114 @@ const Hero = () => {
             mt-10
             "
           >
-            <button
+            <motion.button
+              whileHover={{
+                scale: 1.03,
+              }}
+              whileTap={{
+                scale: 0.97,
+              }}
               className="
               h-14
               px-8
               rounded-full
               bg-[#8B0000]
               dark:bg-[#cf0e31]
-              hover:bg-[#BE123C]
-               hover:dark:bg-[#cf0e31]
               text-white
               font-semibold
               shadow-[0_15px_40px_rgba(225,29,72,0.35)]
+              hover:shadow-[0_20px_60px_rgba(225,29,72,0.45)]
               transition-all
               duration-300
               "
             >
               Join Waitlist
-            </button>
+            </motion.button>
 
-          <DemoBtn/>
+            <DemoBtn />
           </div>
+
+          {/* SOCIAL PROOF */}
+
+          <div
+  ref={statsRef}
+  className="
+  flex
+  items-center
+  gap-10
+  mt-14
+  flex-wrap
+  "
+>
+  {[
+    {
+      number: 50,
+      suffix: "+",
+      label: "Early Users",
+    },
+
+    {
+      number: 24,
+      suffix: "/7",
+      label: "Cloud Backup",
+    },
+
+    {
+      number: 100,
+      suffix: "%",
+      label: "AI Features",
+    },
+  ].map((item, index) => (
+    <motion.div
+      key={index}
+      initial={{
+        opacity: 0,
+        y: 20,
+      }}
+      animate={
+        isInView
+          ? {
+              opacity: 1,
+              y: 0,
+            }
+          : {}
+      }
+      transition={{
+        delay: index * 0.15,
+        duration: 0.6,
+      }}
+      className="relative"
+    >
+      <h3
+        className="
+        text-4xl
+        font-black
+        text-black
+        dark:text-white
+        "
+      >
+        {isInView && (
+          <MotionCounter
+            value={item.number}
+          />
+        )}
+
+        {item.suffix}
+      </h3>
+
+      <p
+        className="
+        text-sm
+        text-gray-500
+        dark:text-gray-400
+        mt-2
+        "
+      >
+        {item.label}
+      </p>
+    </motion.div>
+  ))}
+</div>
         </motion.div>
 
         {/* RIGHT */}
@@ -273,109 +409,69 @@ const Hero = () => {
         <div
           className="
           relative
-          h-[700px]
+          h-[720px]
           flex
           items-center
           justify-center
+          perspective
           "
         >
-          {/* FLOATING CUSTOMER CARD */}
+          {/* FLOATING CARDS */}
 
-          <motion.div
-            animate={{
-              y: [0, -15, 0],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-            }}
-            className="
-            absolute
-            top-20
-            left-0
-            z-30
-            bg-white
-            dark:bg-[#0D0D0D]
-            border
-            border-black/5
-            dark:border-white/10
-            rounded-3xl
-            p-4
-            shadow-xl
-            backdrop-blur-xl
-            "
-          >
-            <p
+          {floatingCards.map((card, index) => (
+            <motion.div
+              key={index}
+              animate={{
+                y: [0, -15, 0],
+              }}
+              transition={{
+                duration: 4 + index,
+                repeat: Infinity,
+              }}
+              style={{
+                top: card.top,
+                left: card.left,
+                right: card.right,
+              }}
               className="
-              text-xs
-              text-gray-500
-              dark:text-gray-400
+              absolute
+              z-30
+              bg-white/80
+              dark:bg-[#0D0D0D]/90
+              backdrop-blur-2xl
+              border
+              border-black/5
+              dark:border-white/10
+              rounded-3xl
+              p-4
+              shadow-2xl
               "
             >
-              New Customer
-            </p>
+              <p
+                className="
+                text-xs
+                text-gray-500
+                dark:text-gray-400
+                "
+              >
+                {card.title}
+              </p>
 
-            <h3
-              className="
-              text-sm
-              font-bold
-              text-black
-              dark:text-white
-              mt-1
-              "
-            >
-              Esther Johnson
-            </h3>
-          </motion.div>
+              <h3
+                className="
+                text-sm
+                font-bold
+                text-black
+                dark:text-white
+                mt-1
+                "
+              >
+                {card.value}
+              </h3>
+            </motion.div>
+          ))}
 
-          {/* FLOATING PAYMENT CARD */}
-
-          <motion.div
-            animate={{
-              y: [0, 15, 0],
-            }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-            }}
-            className="
-            absolute
-            bottom-24
-            right-0
-            z-30
-            bg-white
-            dark:bg-[#0D0D0D]
-            border
-            border-black/5
-            dark:border-white/10
-            rounded-3xl
-            p-4
-            shadow-xl
-            "
-          >
-            <p
-              className="
-              text-xs
-              text-gray-500
-              dark:text-gray-400
-              "
-            >
-              Payment Received
-            </p>
-
-            <h3
-              className="
-              text-lg
-              font-black
-              text-[#E11D48]
-              mt-1
-              "
-            >
-              ₦120,000
-            </h3>
-          </motion.div>
-
-          {/* MAIN HERO VISUAL */}
+          {/* MAIN VISUAL */}
 
           <AnimatePresence mode="wait">
             <motion.img
@@ -384,18 +480,18 @@ const Hero = () => {
               alt=""
               initial={{
                 opacity: 0,
-                scale: 0.9,
+                scale: 0.85,
                 rotateY: -20,
               }}
               animate={{
                 opacity: 1,
                 scale: 1,
                 rotateY: 0,
-                y: [0, -15, 0],
+                y: [0, -18, 0],
               }}
               exit={{
                 opacity: 0,
-                scale: 0.9,
+                scale: 0.85,
                 rotateY: 20,
               }}
               transition={{
@@ -404,11 +500,12 @@ const Hero = () => {
               className="
               relative
               z-20
-              w-[300px]
-              sm:w-[380px]
-              lg:w-[450px]
+              w-[320px]
+              sm:w-[430px]
+              lg:w-[520px]
               object-contain
-              drop-shadow-[0_40px_80px_rgba(0,0,0,0.25)]
+              drop-shadow-[0_40px_80px_rgba(0,0,0,0.35)]
+              phone-3d
               "
             />
           </AnimatePresence>
@@ -417,8 +514,8 @@ const Hero = () => {
 
           <motion.div
             animate={{
-              scale: [1, 1.05, 1],
-              opacity: [0.3, 0.5, 0.3],
+              scale: [1, 1.08, 1],
+              opacity: [0.25, 0.45, 0.25],
             }}
             transition={{
               duration: 6,
@@ -426,11 +523,11 @@ const Hero = () => {
             }}
             className="
             absolute
-            w-[420px]
-            h-[420px]
+            w-[500px]
+            h-[500px]
             rounded-full
-            bg-[#E11D48]/10
-            blur-3xl
+            bg-[#E11D48]/20
+            blur-[120px]
             "
           />
         </div>

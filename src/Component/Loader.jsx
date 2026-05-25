@@ -94,7 +94,7 @@ export default function Loader() {
             className="text-black/30 tracking-[0.18em] text-[9px] uppercase font-light"
             style={{ fontFamily: "-apple-system, 'Helvetica Neue', sans-serif" }}
           >
-            Bespoke Craftsmanship
+           Your Tailoring Business, Fully Organized
           </span>
         </motion.div>
       </motion.div>

@@ -7,7 +7,7 @@ const MotionCounter = ({ value }) => {
 
   useEffect(() => {
     const controls = animate(count, value, {
-      duration: 4,
+      duration: 2,
       onUpdate(latest) {
         setDisplay(Math.floor(latest));
       },

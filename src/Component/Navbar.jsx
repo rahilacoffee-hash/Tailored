@@ -78,6 +78,13 @@ const Navbar = () => {
       href: "#faq",
     },
 
+
+    {
+      name: "Contact",
+      href: "#contact",
+    },
+    
+
     
   ];
 
