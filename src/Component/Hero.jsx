@@ -406,9 +406,9 @@ const isInView = useInView(statsRef, {
  <div className="flex items-center gap-3  mt-4 justify-center lg:justify-start">
                 <div className="flex -space-x-3 ">
                   {[
-                    "https://i.pravatar.cc/150?img=32",
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7ipASQND97C9Q6_KpMfBqJ8NNSJ4KjeZ8SQ&s",
                     "https://i.pravatar.cc/150?img=12",
-                    "https://i.pravatar.cc/150?img=45",
+                    "https://uosjournalism.shorthandstories.com/weareigbo/assets/mpAsy14sZs/still-1920x1080.jpeg",
                   ].map((src, i) => (
                     <img
                       key={i}
