@@ -16,6 +16,7 @@ import Contact from "./Component/Contact";
 import Footer from "./Component/Footer";
 import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import Terms from "./Pages/Terms";
+import AIChat from "./Component/AIChat";
 
 const Home = () => {
   return (
@@ -31,6 +32,7 @@ const Home = () => {
       <Waitlist />
       <Contact />
       <Footer />
+      <AIChat />
     </main>
   );
 };
