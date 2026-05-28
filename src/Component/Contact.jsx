@@ -131,13 +131,13 @@ const Contact = () => {
                 icon: <FiMail />,
                 title: "Email",
                 value:
-                  "tailoredfashionapp@gmail.com",
+                  "Tailoredtailorhub@gmail.com",
               },
 
               {
                 icon: <FiPhone />,
                 title: "Phone",
-                value: "+234 812 345 6789",
+                value: "+234 8165 662 099",
               },
 
               {

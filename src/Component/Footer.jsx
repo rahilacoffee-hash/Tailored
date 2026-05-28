@@ -131,7 +131,7 @@ const Footer = () => {
 
             <div className="flex items-center gap-4 mt-7">
               <a
-                href="#"
+                href="https://www.instagram.com/tailoredapp_?utm_source=qr&igsh=MWdkMnNtbmR5cmQyZA=="
                 className="
                 w-11
                 h-11
@@ -319,7 +319,7 @@ const Footer = () => {
                   </p>
 
                   <p className="text-gray-600 dark:text-gray-400 text-sm">
-                    hello@tailored.app
+                    Tailoredtailorhub@gmail.com
                   </p>
                 </div>
               </div>
@@ -346,7 +346,7 @@ const Footer = () => {
                   </p>
 
                   <p className="text-gray-600 dark:text-gray-400 text-sm">
-                    +234 XXX XXX XXXX
+                    +234 8165 662 099
                   </p>
                 </div>
               </div>
@@ -373,7 +373,7 @@ const Footer = () => {
                   </p>
 
                   <p className="text-gray-600 dark:text-gray-400 text-sm">
-                    Lagos, Nigeria
+                    Abuja, Nigeria
                   </p>
                 </div>
               </div>

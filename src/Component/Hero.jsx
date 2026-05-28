@@ -3,6 +3,7 @@ import { motion, AnimatePresence, useInView } from "framer-motion";
 import HeroBadge from "../Component/HeroBadge";
 import DemoBtn from "./WatchDemoBtn";
 import MotionCounter from "./MotionCounter";
+import { FaStar } from "react-icons/fa";
 
 const heroSlides = [
   {
@@ -402,7 +403,34 @@ const isInView = useInView(statsRef, {
     </motion.div>
   ))}
 </div>
+ <div className="flex items-center gap-3  mt-4 justify-center lg:justify-start">
+                <div className="flex -space-x-3 ">
+                  {[
+                    "https://i.pravatar.cc/150?img=32",
+                    "https://i.pravatar.cc/150?img=12",
+                    "https://i.pravatar.cc/150?img=45",
+                  ].map((src, i) => (
+                    <img
+                      key={i}
+                      src={src}
+                      alt="customer"
+                      className="w-9 h-9 rounded-full border-2 border-[#1a0000] object-cover"
+                    />
+                  ))}
+                </div>
+                <div>
+                  <p className="text-black dark:text-white text-sm font-semibold">
+                    Our Happy Customers
+                  </p>
+                  <div className="flex items-center gap-1">
+                    <FaStar className="text-yellow-400 text-xs" />
+                    <span className="text-gray-400 text-xs">4.5 Review</span>
+                  </div>
+                </div>
+              </div>
         </motion.div>
+
+        
 
         {/* RIGHT */}
 
