@@ -1,19 +1,19 @@
 import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+
 import HeroBadge from "../Component/HeroBadge";
 import DemoBtn from "./WatchDemoBtn";
 import MotionCounter from "./MotionCounter";
+
 import { FaStar } from "react-icons/fa";
 
 const heroSlides = [
   {
-    type: "phone",
-    image: "/hero-phone1.png",
+    image: "/tailore_phone.webp",
   },
 
   {
-    type: "tailor",
-    image: "/tailor-using-app1.png",
+    image: "/phone.webp",
   },
 ];
 
@@ -41,26 +41,35 @@ const floatingCards = [
 ];
 
 const Hero = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentSlide, setCurrentSlide] =
+    useState(0);
 
   /* AUTO SWITCH */
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) =>
-        prev === heroSlides.length - 1 ? 0 : prev + 1,
+        prev === heroSlides.length - 1
+          ? 0
+          : prev + 1
       );
-    }, 9000);
+    }, 12000);
 
-    return () => clearInterval(interval);
+    return () =>
+      clearInterval(interval);
   }, []);
+
+  /* STATS */
 
   const statsRef = useRef(null);
 
-const isInView = useInView(statsRef, {
-  once: false,
-  amount: 0.5,
-});
+  const isInView = useInView(
+    statsRef,
+    {
+      once: true,
+      amount: 0.4,
+    }
+  );
 
   return (
     <section
@@ -82,78 +91,63 @@ const isInView = useInView(statsRef, {
         className="
         absolute
         inset-0
-        opacity-[0.04]
+        opacity-[0.03]
+        pointer-events-none
         "
         style={{
-          backgroundImage: "radial-gradient(#E11D48 1px, transparent 1px)",
-          backgroundSize: "28px 28px",
+          backgroundImage:
+            "radial-gradient(#E11D48 1px, transparent 1px)",
+          backgroundSize:
+            "28px 28px",
         }}
       />
 
       {/* GLOW 1 */}
 
-      <motion.div
-        animate={{
-          opacity: [0.25, 0.45, 0.25],
-          scale: [1, 1.2, 1],
-          x: [0, 80, 0],
-          y: [0, -50, 0],
-        }}
-        transition={{
-          duration: 12,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+      <div
         className="
         absolute
-        top-[-200px]
-        left-[-150px]
-        w-[550px]
-        h-[550px]
-        bg-[#E11D48]/20
-        blur-[140px]
+        top-[-180px]
+        left-[-120px]
+        w-[420px]
+        h-[420px]
+        bg-[#E11D48]/15
+        blur-[90px]
         rounded-full
+        pointer-events-none
         "
       />
 
       {/* GLOW 2 */}
 
-      <motion.div
-        animate={{
-          opacity: [0.1, 0.3, 0.1],
-          scale: [1, 1.1, 1],
-          x: [0, -50, 0],
-          y: [0, 60, 0],
-        }}
-        transition={{
-          duration: 14,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+      <div
         className="
         absolute
-        bottom-[-250px]
-        right-[-150px]
-        w-[500px]
-        h-[500px]
+        bottom-[-220px]
+        right-[-120px]
+        w-[380px]
+        h-[380px]
         bg-blue-400/10
-        blur-[140px]
+        blur-[90px]
         rounded-full
+        pointer-events-none
         "
       />
 
-      {/* WATERMARK */}
+      {/* WATERMARK LIGHT */}
 
       <img
         src="/tailored-icon1.png"
         alt=""
+        loading="lazy"
+        decoding="async"
         className="
         absolute
         left-1/2
         top-1/2
         -translate-x-1/2
         -translate-y-1/2
-        w-[650px]
+        w-[520px]
         opacity-[0.03]
         pointer-events-none
         select-none
@@ -161,16 +155,20 @@ const isInView = useInView(statsRef, {
         "
       />
 
+      {/* WATERMARK DARK */}
+
       <img
-        src="/tailored-icon.PNG"
+        src="/tailored-icon.png"
         alt=""
+        loading="lazy"
+        decoding="async"
         className="
         absolute
         left-1/2
         top-1/2
         -translate-x-1/2
         -translate-y-1/2
-        w-[650px]
+        w-[520px]
         opacity-[0.03]
         pointer-events-none
         select-none
@@ -202,26 +200,19 @@ const isInView = useInView(statsRef, {
         <motion.div
           initial={{
             opacity: 0,
-            y: 50,
+            y: 30,
           }}
           animate={{
             opacity: 1,
             y: 0,
           }}
           transition={{
-            duration: 0.9,
+            duration: 0.7,
           }}
         >
           {/* BADGE */}
 
-          <motion.div
-            animate={{
-              y: [0, -5, 0],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-            }}
+          <div
             className="
             inline-flex
             items-center
@@ -234,12 +225,12 @@ const isInView = useInView(statsRef, {
             border
             border-black/5
             dark:border-white/10
-            backdrop-blur-xl
+            backdrop-blur-sm
             shadow-lg
             "
           >
             <HeroBadge />
-          </motion.div>
+          </div>
 
           {/* TITLE */}
 
@@ -257,6 +248,7 @@ const isInView = useInView(statsRef, {
             "
           >
             Run Your
+
             <span
               className="
               block
@@ -266,10 +258,11 @@ const isInView = useInView(statsRef, {
             >
               Tailoring Business
             </span>
+
             Like A Modern Brand.
           </h1>
 
-          {/* TEXT */}
+          {/* DESCRIPTION */}
 
           <p
             className="
@@ -281,8 +274,13 @@ const isInView = useInView(statsRef, {
             dark:text-gray-400
             "
           >
-            Manage customers, measurements, payments and orders with one premium
-            platform built for African tailors and fashion designers.
+            Manage customers,
+            measurements,
+            payments and orders
+            with one premium
+            platform built for
+            African tailors and
+            fashion designers.
           </p>
 
           {/* BUTTONS */}
@@ -295,13 +293,7 @@ const isInView = useInView(statsRef, {
             mt-10
             "
           >
-            <motion.button
-              whileHover={{
-                scale: 1.03,
-              }}
-              whileTap={{
-                scale: 0.97,
-              }}
+            <button
               className="
               h-14
               px-8
@@ -310,127 +302,169 @@ const isInView = useInView(statsRef, {
               dark:bg-[#cf0e31]
               text-white
               font-semibold
-              shadow-[0_15px_40px_rgba(225,29,72,0.35)]
-              hover:shadow-[0_20px_60px_rgba(225,29,72,0.45)]
+              shadow-[0_15px_40px_rgba(225,29,72,0.25)]
               transition-all
               duration-300
+              hover:scale-[1.02]
               "
             >
               Join Waitlist
-            </motion.button>
+            </button>
 
             <DemoBtn />
           </div>
 
-          {/* SOCIAL PROOF */}
+          {/* STATS */}
 
           <div
-  ref={statsRef}
-  className="
-  flex
-  items-center
-  gap-10
-  mt-14
-  flex-wrap
-  "
->
-  {[
-    {
-      number: 50,
-      suffix: "+",
-      label: "Early Users",
-    },
+            ref={statsRef}
+            className="
+            flex
+            items-center
+            gap-10
+            mt-14
+            flex-wrap
+            "
+          >
+            {[
+              {
+                number: 50,
+                suffix: "+",
+                label:
+                  "Early Users",
+              },
 
-    {
-      number: 24,
-      suffix: "/7",
-      label: "Cloud Backup",
-    },
+              {
+                number: 24,
+                suffix: "/7",
+                label:
+                  "Cloud Backup",
+              },
 
-    {
-      number: 100,
-      suffix: "%",
-      label: "AI Features",
-    },
-  ].map((item, index) => (
-    <motion.div
-      key={index}
-      initial={{
-        opacity: 0,
-        y: 20,
-      }}
-      animate={
-        isInView
-          ? {
-              opacity: 1,
-              y: 0,
-            }
-          : {}
-      }
-      transition={{
-        delay: index * 0.15,
-        duration: 0.6,
-      }}
-      className="relative"
-    >
-      <h3
-        className="
-        text-4xl
-        font-black
-        text-black
-        dark:text-white
-        "
-      >
-        {isInView && (
-          <MotionCounter
-            value={item.number}
-          />
-        )}
+              {
+                number: 100,
+                suffix: "%",
+                label:
+                  "AI Features",
+              },
+            ].map(
+              (item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{
+                    opacity: 0,
+                    y: 20,
+                  }}
+                  animate={
+                    isInView
+                      ? {
+                          opacity: 1,
+                          y: 0,
+                        }
+                      : {}
+                  }
+                  transition={{
+                    delay:
+                      index * 0.15,
+                    duration: 0.5,
+                  }}
+                >
+                  <h3
+                    className="
+                    text-4xl
+                    font-black
+                    text-black
+                    dark:text-white
+                    "
+                  >
+                    {isInView && (
+                      <MotionCounter
+                        value={
+                          item.number
+                        }
+                      />
+                    )}
 
-        {item.suffix}
-      </h3>
+                    {item.suffix}
+                  </h3>
 
-      <p
-        className="
-        text-sm
-        text-gray-500
-        dark:text-gray-400
-        mt-2
-        "
-      >
-        {item.label}
-      </p>
-    </motion.div>
-  ))}
-</div>
- <div className="flex items-center gap-3  mt-4 justify-center lg:justify-start">
-                <div className="flex -space-x-3 ">
-                  {[
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7ipASQND97C9Q6_KpMfBqJ8NNSJ4KjeZ8SQ&s",
-                    "https://i.pravatar.cc/150?img=12",
-                    "https://uosjournalism.shorthandstories.com/weareigbo/assets/mpAsy14sZs/still-1920x1080.jpeg",
-                  ].map((src, i) => (
-                    <img
-                      key={i}
-                      src={src}
-                      alt="customer"
-                      className="w-9 h-9 rounded-full border-2 border-[#1a0000] object-cover"
-                    />
-                  ))}
-                </div>
-                <div>
-                  <p className="text-black dark:text-white text-sm font-semibold">
-                    Our Happy Customers
+                  <p
+                    className="
+                    text-sm
+                    text-gray-500
+                    dark:text-gray-400
+                    mt-2
+                    "
+                  >
+                    {item.label}
                   </p>
-                  <div className="flex items-center gap-1">
-                    <FaStar className="text-yellow-400 text-xs" />
-                    <span className="text-gray-400 text-xs">4.5 Review</span>
-                  </div>
-                </div>
-              </div>
-        </motion.div>
+                </motion.div>
+              )
+            )}
+          </div>
 
-        
+          {/* CUSTOMERS */}
+
+          <div
+            className="
+            flex
+            items-center
+            gap-3
+            mt-6
+            "
+          >
+            <div className="flex -space-x-3">
+              {[
+                "/customers/customer1.webp",
+                "/customers/customer2.webp",
+                "/customers/customer3.webp",
+              ].map((src, i) => (
+                <img
+                  key={i}
+                  src={src}
+                  alt="customer"
+                  loading="lazy"
+                  decoding="async"
+                  className="
+                  w-9
+                  h-9
+                  rounded-full
+                  border-2
+                  border-[#FFF9F5]
+                  dark:border-[#050505]
+                  object-cover
+                  "
+                />
+              ))}
+            </div>
+
+            <div>
+              <p
+                className="
+                text-black
+                dark:text-white
+                text-sm
+                font-semibold
+                "
+              >
+                Our Happy Customers
+              </p>
+
+              <div className="flex items-center gap-1">
+                <FaStar className="text-yellow-400 text-xs" />
+
+                <span
+                  className="
+                  text-gray-400
+                  text-xs
+                  "
+                >
+                  4.5 Review
+                </span>
+              </div>
+            </div>
+          </div>
+        </motion.div>
 
         {/* RIGHT */}
 
@@ -446,116 +480,106 @@ const isInView = useInView(statsRef, {
         >
           {/* FLOATING CARDS */}
 
-          {floatingCards.map((card, index) => (
-            <motion.div
-              key={index}
-              animate={{
-                y: [0, -15, 0],
-              }}
-              transition={{
-                duration: 4 + index,
-                repeat: Infinity,
-              }}
-              style={{
-                top: card.top,
-                left: card.left,
-                right: card.right,
-              }}
-              className="
-              absolute
-              z-30
-              bg-white/80
-              dark:bg-[#0D0D0D]/90
-              backdrop-blur-2xl
-              border
-              border-black/5
-              dark:border-white/10
-              rounded-3xl
-              p-4
-              shadow-2xl
-              "
-            >
-              <p
+          {floatingCards.map(
+            (card, index) => (
+              <motion.div
+                key={index}
+                whileHover={{
+                  y: -4,
+                }}
+                transition={{
+                  duration: 0.2,
+                }}
+                style={{
+                  top: card.top,
+                  left: card.left,
+                  right: card.right,
+                }}
                 className="
-                text-xs
-                text-gray-500
-                dark:text-gray-400
+                absolute
+                z-30
+                bg-white/80
+                dark:bg-[#0D0D0D]/90
+                backdrop-blur-sm
+                border
+                border-black/5
+                dark:border-white/10
+                rounded-3xl
+                p-4
+                shadow-xl
                 "
               >
-                {card.title}
-              </p>
+                <p
+                  className="
+                  text-xs
+                  text-gray-500
+                  dark:text-gray-400
+                  "
+                >
+                  {card.title}
+                </p>
 
-              <h3
-                className="
-                text-sm
-                font-bold
-                text-black
-                dark:text-white
-                mt-1
-                "
-              >
-                {card.value}
-              </h3>
-            </motion.div>
-          ))}
+                <h3
+                  className="
+                  text-sm
+                  font-bold
+                  text-black
+                  dark:text-white
+                  mt-1
+                  "
+                >
+                  {card.value}
+                </h3>
+              </motion.div>
+            )
+          )}
 
-          {/* MAIN VISUAL */}
+          {/* MAIN IMAGE */}
 
-          <AnimatePresence mode="wait">
-            <motion.img
-              key={heroSlides[currentSlide].image}
-              src={heroSlides[currentSlide].image}
-              alt=""
-              initial={{
-                opacity: 0,
-                scale: 0.85,
-                rotateY: -20,
-              }}
-              animate={{
-                opacity: 1,
-                scale: 1,
-                rotateY: 0,
-                y: [0, -18, 0],
-              }}
-              exit={{
-                opacity: 0,
-                scale: 0.85,
-                rotateY: 20,
-              }}
-              transition={{
-                duration: 1,
-              }}
-              className="
-              relative
-              z-20
-              w-[320px]
-              sm:w-[430px]
-              lg:w-[520px]
-              object-contain
-              drop-shadow-[0_40px_80px_rgba(0,0,0,0.35)]
-              phone-3d
-              "
-            />
-          </AnimatePresence>
-
-          {/* GLOW RING */}
-
-          <motion.div
+          <motion.img
+            key={
+              heroSlides[
+                currentSlide
+              ].image
+            }
+            src={
+              heroSlides[
+                currentSlide
+              ].image
+            }
+            alt=""
+            loading="eager"
+            decoding="async"
+            initial={{
+              opacity: 0,
+            }}
             animate={{
-              scale: [1, 1.08, 1],
-              opacity: [0.25, 0.45, 0.25],
+              opacity: 1,
             }}
             transition={{
-              duration: 6,
-              repeat: Infinity,
+              duration: 0.6,
             }}
             className="
+            relative
+            z-20
+            w-[320px]
+            sm:w-[430px]
+            lg:w-[500px]
+            object-contain
+            phone-3d
+            "
+          />
+
+          {/* GLOW */}
+
+          <div
+            className="
             absolute
-            w-[500px]
-            h-[500px]
+            w-[380px]
+            h-[380px]
             rounded-full
-            bg-[#E11D48]/20
-            blur-[120px]
+            bg-[#E11D48]/15
+            blur-[70px]
             "
           />
         </div>

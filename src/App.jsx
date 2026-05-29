@@ -20,67 +20,7 @@ import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import Terms from "./Pages/Terms";
 import AIChat from "./Component/AIChat";
 
-
-
-function App() {
-  const [darkMode, setDarkMode] = useState(() => {
-    return localStorage.getItem("theme") === "dark";
-  });
-
-  const [loading, setLoading] = useState(true);
-
-  /* THEME */
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-
-      localStorage.setItem("theme", "light");
-    }
-  }, [darkMode]);
-
-  /* LOADER ONLY ON FIRST WEBSITE OPEN */
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 3100);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  return (
-    <>
-      {/* WEBSITE */}
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-
-        <Route
-          path="/privacy-policy"
-          element={<PrivacyPolicy />}
-        />
-
-        <Route
-          path="/terms"
-          element={<Terms />}
-        />
-      </Routes>
-
-      {/* LOADER */}
-
-      <AnimatePresence mode="wait">
-        {loading && <Loader />}
-      </AnimatePresence>
-    </>
-  );
-}
-
-export default App;
+/* HOME PAGE */
 
 const Home = () => {
   return (
@@ -100,3 +40,96 @@ const Home = () => {
     </main>
   );
 };
+
+function App() {
+  /* THEME */
+
+  const [darkMode, setDarkMode] =
+    useState(() => {
+      return (
+        localStorage.getItem("theme") ===
+        "dark"
+      );
+    });
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add(
+        "dark"
+      );
+
+      localStorage.setItem(
+        "theme",
+        "dark"
+      );
+    } else {
+      document.documentElement.classList.remove(
+        "dark"
+      );
+
+      localStorage.setItem(
+        "theme",
+        "light"
+      );
+    }
+  }, [darkMode]);
+
+  /* LOADER */
+
+  const [loading, setLoading] =
+    useState(() => true);
+
+  useEffect(() => {
+    /* PREVENT SCROLL DURING LOAD */
+    document.body.style.overflow =
+      "hidden";
+
+    const timer = setTimeout(() => {
+      setLoading(false);
+
+      /* RESTORE SCROLL */
+      document.body.style.overflow =
+        "auto";
+    }, 2200);
+
+    return () => {
+      clearTimeout(timer);
+
+      document.body.style.overflow =
+        "auto";
+    };
+  }, []);
+
+  return (
+    <>
+      {/* LOADER FIRST */}
+
+      <AnimatePresence>
+        {loading && <Loader />}
+      </AnimatePresence>
+
+      {/* WEBSITE AFTER LOADER */}
+
+      {!loading && (
+        <Routes>
+          <Route
+            path="/"
+            element={<Home />}
+          />
+
+          <Route
+            path="/privacy-policy"
+            element={<PrivacyPolicy />}
+          />
+
+          <Route
+            path="/terms"
+            element={<Terms />}
+          />
+        </Routes>
+      )}
+    </>
+  );
+}
+
+export default App;

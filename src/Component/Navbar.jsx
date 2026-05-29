@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 import {
   HiMenu,
@@ -9,41 +9,40 @@ import {
 } from "react-icons/hi";
 
 const Navbar = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] =
+    useState(false);
 
   /* THEME */
 
-  const [darkMode, setDarkMode] = useState(() => {
-    return localStorage.getItem("theme") === "dark";
-  });
+  const [darkMode, setDarkMode] =
+    useState(() => {
+      return (
+        localStorage.getItem("theme") ===
+        "dark"
+      );
+    });
 
   useEffect(() => {
     if (darkMode) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
+      document.documentElement.classList.add(
+        "dark"
+      );
+
+      localStorage.setItem(
+        "theme",
+        "dark"
+      );
     } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
+      document.documentElement.classList.remove(
+        "dark"
+      );
+
+      localStorage.setItem(
+        "theme",
+        "light"
+      );
     }
   }, [darkMode]);
-
-  /* CLOSE MENU ON DESKTOP */
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1024) {
-        setMenuOpen(false);
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () =>
-      window.removeEventListener(
-        "resize",
-        handleResize
-      );
-  }, []);
 
   /* NAV LINKS */
 
@@ -68,21 +67,15 @@ const Navbar = () => {
       href: "#howitworks",
     },
 
-  
-
     {
       name: "FAQ",
       href: "#faq",
     },
 
-
     {
       name: "Contact",
       href: "#contact",
     },
-    
-
-    
   ];
 
   return (
@@ -93,8 +86,6 @@ const Navbar = () => {
       left-0
       w-full
       z-50
-      transition-all
-      duration-500
       "
     >
       {/* BACKDROP */}
@@ -103,9 +94,9 @@ const Navbar = () => {
         className="
         absolute
         inset-0
-        bg-[#FFF9F5]/70
-        dark:bg-[#050505]/70
-        backdrop-blur-2xl
+        bg-[#FFF9F5]/80
+        dark:bg-[#050505]/80
+        backdrop-blur-md
         border-b
         border-black/5
         dark:border-white/5
@@ -130,16 +121,16 @@ const Navbar = () => {
       >
         {/* LOGO */}
 
-        <motion.a
+        <a
           href="/"
-          whileHover={{
-            scale: 1.03,
-          }}
           className="
           flex
           items-center
           relative
           z-50
+          transition-transform
+          duration-300
+          hover:scale-[1.02]
           "
         >
           {/* LIGHT MODE LOGO */}
@@ -147,6 +138,7 @@ const Navbar = () => {
           <img
             src="tailored-icon1.png"
             alt="Tailored"
+            loading="lazy"
             className="
             w-28
             object-contain
@@ -159,6 +151,7 @@ const Navbar = () => {
           <img
             src="tailored-icon.PNG"
             alt="Tailored"
+            loading="lazy"
             className="
             w-28
             object-contain
@@ -166,7 +159,7 @@ const Navbar = () => {
             dark:block
             "
           />
-        </motion.a>
+        </a>
 
         {/* DESKTOP LINKS */}
 
@@ -179,11 +172,13 @@ const Navbar = () => {
           "
         >
           {navLinks.map((link, index) => (
-            <motion.li
+            <li
               key={index}
-              whileHover={{
-                y: -2,
-              }}
+              className="
+              transition-transform
+              duration-200
+              hover:-translate-y-0.5
+              "
             >
               <a
                 href={link.href}
@@ -210,7 +205,7 @@ const Navbar = () => {
               >
                 {link.name}
               </a>
-            </motion.li>
+            </li>
           ))}
         </ul>
 
@@ -219,10 +214,7 @@ const Navbar = () => {
         <div className="flex items-center gap-4">
           {/* THEME TOGGLE */}
 
-          <motion.button
-            whileTap={{
-              scale: 0.9,
-            }}
+          <button
             onClick={() =>
               setDarkMode(!darkMode)
             }
@@ -237,7 +229,7 @@ const Navbar = () => {
             border-black/10
             dark:border-white/10
             transition-all
-            duration-500
+            duration-300
             flex
             items-center
             px-1
@@ -246,10 +238,7 @@ const Navbar = () => {
           >
             {/* GLOW */}
 
-            <motion.div
-              animate={{
-                opacity: darkMode ? 1 : 0.5,
-              }}
+            <div
               className={`
               absolute
               inset-0
@@ -264,13 +253,7 @@ const Navbar = () => {
 
             {/* SLIDER */}
 
-            <motion.div
-              layout
-              transition={{
-                type: "spring",
-                stiffness: 500,
-                damping: 30,
-              }}
+            <div
               className={`
               absolute
               top-1
@@ -280,8 +263,10 @@ const Navbar = () => {
               flex
               items-center
               justify-center
-              shadow-lg
+              shadow-md
               z-10
+              transition-all
+              duration-300
               ${
                 darkMode
                   ? "translate-x-7 bg-[#cf0e31]"
@@ -289,48 +274,18 @@ const Navbar = () => {
               }
               `}
             >
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={darkMode ? "moon" : "sun"}
-                  initial={{
-                    rotate: -180,
-                    opacity: 0,
-                    scale: 0.5,
-                  }}
-                  animate={{
-                    rotate: 0,
-                    opacity: 1,
-                    scale: 1,
-                  }}
-                  exit={{
-                    rotate: 180,
-                    opacity: 0,
-                    scale: 0.5,
-                  }}
-                  transition={{
-                    duration: 0.4,
-                  }}
-                >
-                  {darkMode ? (
-                    <HiMoon className="text-white text-sm" />
-                  ) : (
-                    <HiSun className="text-yellow-500 text-sm" />
-                  )}
-                </motion.div>
-              </AnimatePresence>
-            </motion.div>
-          </motion.button>
+              {darkMode ? (
+                <HiMoon className="text-white text-sm" />
+              ) : (
+                <HiSun className="text-yellow-500 text-sm" />
+              )}
+            </div>
+          </button>
 
           {/* DESKTOP CTA */}
 
-          <motion.a
+          <a
             href="#waitlist"
-            whileHover={{
-              scale: 1.05,
-            }}
-            whileTap={{
-              scale: 0.98,
-            }}
             className="
             hidden
             lg:flex
@@ -344,20 +299,18 @@ const Navbar = () => {
             rounded-full
             text-sm
             font-semibold
-            shadow-[0_10px_35px_rgba(225,29,72,0.25)]
+            shadow-lg
             transition-all
             duration-300
+            hover:scale-105
             "
           >
             Join Waitlist
-          </motion.a>
+          </a>
 
           {/* HAMBURGER */}
 
-          <motion.button
-            whileTap={{
-              scale: 0.9,
-            }}
+          <button
             onClick={() =>
               setMenuOpen(true)
             }
@@ -379,149 +332,106 @@ const Navbar = () => {
             "
           >
             <HiMenu className="text-2xl" />
-          </motion.button>
+          </button>
         </div>
       </nav>
 
       {/* MOBILE OVERLAY */}
 
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            exit={{
-              opacity: 0,
-            }}
+      {menuOpen && (
+        <div
+          onClick={() =>
+            setMenuOpen(false)
+          }
+          className="
+          fixed
+          inset-0
+          bg-black/30
+          backdrop-blur-sm
+          z-30
+          lg:hidden
+          "
+        />
+      )}
+
+      {/* MOBILE MENU */}
+
+      {menuOpen && (
+        <motion.div
+          initial={{
+            x: "100%",
+          }}
+          animate={{
+            x: 0,
+          }}
+          exit={{
+            x: "100%",
+          }}
+          transition={{
+            duration: 0.25,
+          }}
+          className="
+          fixed
+          top-0
+          right-0
+          h-screen
+          w-[78%]
+          bg-[#FFF9F5]
+          dark:bg-[#050505]
+          shadow-xl
+          z-40
+          lg:hidden
+          "
+        >
+          {/* CLOSE BUTTON */}
+
+          <button
             onClick={() =>
               setMenuOpen(false)
             }
             className="
-            fixed
-            inset-0
-            bg-black/40
-            backdrop-blur-sm
-            z-30
-            lg:hidden
-            "
-          />
-        )}
-      </AnimatePresence>
-
-      {/* MOBILE MENU */}
-
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{
-              x: "100%",
-            }}
-            animate={{
-              x: 0,
-            }}
-            exit={{
-              x: "100%",
-            }}
-            transition={{
-              type: "spring",
-              damping: 30,
-              stiffness: 300,
-            }}
-            className="
-            fixed
-            top-0
-            right-0
-            h-screen
-            w-[78%]
-            bg-[#FFF9F5]
-            dark:bg-[#050505]
-            shadow-2xl
-            z-40
-            lg:hidden
-            overflow-hidden
+            absolute
+            top-6
+            right-6
+            z-50
+            w-11
+            h-11
+            rounded-full
+            bg-black/5
+            dark:bg-white/10
+            border
+            border-black/10
+            dark:border-white/10
+            flex
+            items-center
+            justify-center
+            text-black
+            dark:text-white
+            transition-all
+            duration-300
             "
           >
-            {/* GLOW */}
+            <HiX className="text-2xl" />
+          </button>
 
-            <div
-              className="
-              absolute
-              top-[-100px]
-              right-[-100px]
-              w-[250px]
-              h-[250px]
-              bg-[#E11D48]/20
-              blur-3xl
-              rounded-full
-              "
-            />
+          {/* CONTENT */}
 
-            {/* CLOSE BUTTON */}
-
-            <button
-              onClick={() =>
-                setMenuOpen(false)
-              }
-              className="
-              absolute
-              top-6
-              right-6
-              z-50
-              w-11
-              h-11
-              rounded-full
-              bg-black/5
-              dark:bg-white/10
-              border
-              border-black/10
-              dark:border-white/10
-              flex
-              items-center
-              justify-center
-              text-black
-              dark:text-white
-              transition-all
-              duration-300
-              hover:rotate-90
-              "
-            >
-              <HiX className="text-2xl" />
-            </button>
-
-            {/* CONTENT */}
-
-            <div
-              className="
-              relative
-              z-10
-              flex
-              flex-col
-              pt-32
-              px-8
-              "
-            >
-              {navLinks.map((link, index) => (
-                <motion.a
+          <div
+            className="
+            flex
+            flex-col
+            pt-32
+            px-8
+            "
+          >
+            {navLinks.map(
+              (link, index) => (
+                <a
                   key={index}
                   href={link.href}
                   onClick={() =>
                     setMenuOpen(false)
                   }
-                  initial={{
-                    opacity: 0,
-                    x: 30,
-                  }}
-                  animate={{
-                    opacity: 1,
-                    x: 0,
-                  }}
-                  transition={{
-                    delay: index * 0.08,
-                  }}
                   className="
                   py-5
                   border-b
@@ -538,50 +448,36 @@ const Navbar = () => {
                   "
                 >
                   {link.name}
-                </motion.a>
-              ))}
+                </a>
+              )
+            )}
 
-              {/* MOBILE CTA */}
+            {/* MOBILE CTA */}
 
-              <motion.a
-                href="#waitlist"
-                onClick={() =>
-                  setMenuOpen(false)
-                }
-                initial={{
-                  opacity: 0,
-                  y: 30,
-                }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                transition={{
-                  delay: 0.4,
-                }}
-                whileTap={{
-                  scale: 0.98,
-                }}
-                className="
-                mt-10
-                bg-[#cf0e31]
-                hover:bg-[#BE123C]
-                text-white
-                py-4
-                rounded-full
-                font-semibold
-                text-center
-                shadow-[0_10px_35px_rgba(225,29,72,0.3)]
-                transition-all
-                duration-300
-                "
-              >
-                Join Waitlist
-              </motion.a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <a
+              href="#waitlist"
+              onClick={() =>
+                setMenuOpen(false)
+              }
+              className="
+              mt-10
+              bg-[#cf0e31]
+              hover:bg-[#BE123C]
+              text-white
+              py-4
+              rounded-full
+              font-semibold
+              text-center
+              shadow-lg
+              transition-all
+              duration-300
+              "
+            >
+              Join Waitlist
+            </a>
+          </div>
+        </motion.div>
+      )}
     </header>
   );
 };
