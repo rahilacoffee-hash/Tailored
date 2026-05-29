@@ -68,10 +68,7 @@ const Navbar = () => {
       href: "#howitworks",
     },
 
-    {
-      name: "Testimonials",
-      href: "#testimonials",
-    },
+  
 
     {
       name: "FAQ",

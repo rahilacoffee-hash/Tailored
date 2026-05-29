@@ -120,7 +120,7 @@ export default function AIChat() {
       {/* Floating button */}
       <motion.button
         onClick={() => setOpen((v) => !v)}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[#8B0000] text-white shadow-2xl shadow-red-900/30 flex items-center justify-center"
+        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[#8B0000]  text-white shadow-2xl shadow-red-900/30 flex items-center justify-center"
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}
         animate={open ? {} : { y: [0, -4, 0] }}
@@ -186,7 +186,7 @@ export default function AIChat() {
             )}
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto bg-[#FFF9F5] px-4 py-4 space-y-3">
+            <div className="flex-1 overflow-y-auto bg-[#FFF9F5] dark:bg-black px-4 py-4 space-y-3">
               {messages.map((msg, i) => (
                 <motion.div
                   key={i}
