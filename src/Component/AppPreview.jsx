@@ -41,7 +41,7 @@ const PhoneMockup = ({
 
       {/* SCREEN */}
 
-      <div className="w-full h-full bg-[#111111]">
+      <div className="w-full h-full bg-[#000]">
         {children}
       </div>
     </div>
@@ -56,7 +56,7 @@ const AppPreview = () => {
       relative
       py-32
       overflow-hidden
-      bg-[#050505]
+     bg-black dark:bg-[#FFF9F5]
       text-white
       "
     >
@@ -129,9 +129,6 @@ const AppPreview = () => {
             inline-flex
             items-center
             gap-2
-            bg-white/5
-            border
-            border-white/10
             px-5
             py-2
             rounded-full
@@ -139,7 +136,7 @@ const AppPreview = () => {
             font-bold
             tracking-[0.25em]
             uppercase
-            text-[#FF4D6D]
+           text-[#cf0e31] dark:text-[#8B0000]
             "
           >
             App Experience
@@ -152,10 +149,11 @@ const AppPreview = () => {
             font-black
             leading-tight
             mt-7
+            text-white dark:text-black 
             "
           >
             See Tailored
-            <span className="text-[#E11D48]">
+            <span className="text-[#cf0e31] dark:text-[#8B0000]">
               {" "}
               In Action
             </span>
@@ -246,7 +244,7 @@ const AppPreview = () => {
 
                 <div
                   className="
-                  bg-[#E11D48]
+                 bg-[#cf0e31] dark:bg-[#8B0000]
                   rounded-3xl
                   p-5
                   mb-5
@@ -405,7 +403,7 @@ const AppPreview = () => {
 
                 <div
                   className="
-                  bg-[#E11D48]
+                  bg-[#cf0e31] dark:bg-[#8B0000]
                   rounded-2xl
                   p-5
                   mb-5
@@ -509,7 +507,7 @@ const AppPreview = () => {
                 <div className="flex gap-2 mb-7">
                   <span
                     className="
-                    bg-[#E11D48]
+                    bg-[#cf0e31] dark:bg-[#8B0000]
                     px-4
                     py-2
                     rounded-full
@@ -596,7 +594,7 @@ const AppPreview = () => {
                           className="
                           h-full
                           rounded-full
-                          bg-[#E11D48]
+                         bg-[#cf0e31] dark:bg-[#8B0000]
                           "
                         />
                       </div>

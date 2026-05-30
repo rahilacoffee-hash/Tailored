@@ -1,11 +1,21 @@
-import { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import {
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+
+import {
+  motion,
+  useInView,
+  AnimatePresence,
+} from "framer-motion";
 
 import HeroBadge from "../Component/HeroBadge";
 import DemoBtn from "./WatchDemoBtn";
 import MotionCounter from "./MotionCounter";
 
 import { FaStar } from "react-icons/fa";
+import StoreButtons from "../Layout/StoreButtons";
 
 const heroSlides = [
   {
@@ -66,7 +76,7 @@ const Hero = () => {
   const isInView = useInView(
     statsRef,
     {
-      once: true,
+      once: false,
       amount: 0.4,
     }
   );
@@ -97,6 +107,7 @@ const Hero = () => {
         style={{
           backgroundImage:
             "radial-gradient(#E11D48 1px, transparent 1px)",
+
           backgroundSize:
             "28px 28px",
         }}
@@ -158,7 +169,7 @@ const Hero = () => {
       {/* WATERMARK DARK */}
 
       <img
-        src="/tailored-icon.png"
+        src="/tailored-icon.PNG"
         alt=""
         loading="lazy"
         decoding="async"
@@ -293,26 +304,44 @@ const Hero = () => {
             mt-10
             "
           >
-            <button
+            {/* JOIN */}
+
+            <motion.button
+              whileHover={{
+                scale: 1.02,
+              }}
+              whileTap={{
+                scale: 0.97,
+              }}
               className="
               h-14
               px-8
-              rounded-full
+              rounded-2xl
+
               bg-[#8B0000]
-              dark:bg-[#cf0e31]
+              hover:bg-[#a00000]
+
               text-white
               font-semibold
-              shadow-[0_15px_40px_rgba(225,29,72,0.25)]
+
+              shadow-[0_15px_40px_rgba(139,0,0,0.25)]
+              hover:shadow-[0_20px_55px_rgba(139,0,0,0.35)]
+
               transition-all
               duration-300
-              hover:scale-[1.02]
               "
             >
               Join Waitlist
-            </button>
+            </motion.button>
+
+            {/* DEMO */}
 
             <DemoBtn />
           </div>
+
+          {/* STORE BUTTONS */}
+
+          <StoreButtons />
 
           {/* STATS */}
 
@@ -361,11 +390,15 @@ const Hero = () => {
                           opacity: 1,
                           y: 0,
                         }
-                      : {}
+                      : {
+                          opacity: 0,
+                          y: 20,
+                        }
                   }
                   transition={{
                     delay:
                       index * 0.15,
+
                     duration: 0.5,
                   }}
                 >
@@ -415,9 +448,9 @@ const Hero = () => {
           >
             <div className="flex -space-x-3">
               {[
-                "/customers/customer1.webp",
-                "/customers/customer2.webp",
-                "/customers/customer3.webp",
+                "https://uosjournalism.shorthandstories.com/weareigbo/assets/mpAsy14sZs/still-1920x1080.jpeg",
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQk0BGDokx2vleWyd4PaapXBgM-RJ_c7CGbMg&s",
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-N-XRAVGG9edYgOMOhpSmtEbDXvaI6shKSQ&s",
               ].map((src, i) => (
                 <img
                   key={i}
@@ -475,7 +508,6 @@ const Hero = () => {
           flex
           items-center
           justify-center
-          perspective
           "
         >
           {/* FLOATING CARDS */}
@@ -484,11 +516,18 @@ const Hero = () => {
             (card, index) => (
               <motion.div
                 key={index}
-                whileHover={{
-                  y: -4,
+                animate={{
+                  y: [0, -10, 0],
                 }}
                 transition={{
-                  duration: 0.2,
+                  duration:
+                    4 + index,
+
+                  repeat:
+                    Infinity,
+
+                  ease:
+                    "easeInOut",
                 }}
                 style={{
                   top: card.top,
@@ -498,14 +537,19 @@ const Hero = () => {
                 className="
                 absolute
                 z-30
+
                 bg-white/80
                 dark:bg-[#0D0D0D]/90
+
                 backdrop-blur-sm
+
                 border
                 border-black/5
                 dark:border-white/10
+
                 rounded-3xl
                 p-4
+
                 shadow-xl
                 "
               >
@@ -534,41 +578,52 @@ const Hero = () => {
             )
           )}
 
-          {/* MAIN IMAGE */}
+          {/* IMAGE */}
 
-          <motion.img
-            key={
-              heroSlides[
-                currentSlide
-              ].image
-            }
-            src={
-              heroSlides[
-                currentSlide
-              ].image
-            }
-            alt=""
-            loading="eager"
-            decoding="async"
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            transition={{
-              duration: 0.6,
-            }}
-            className="
-            relative
-            z-20
-            w-[320px]
-            sm:w-[430px]
-            lg:w-[500px]
-            object-contain
-            phone-3d
-            "
-          />
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={
+                heroSlides[
+                  currentSlide
+                ].image
+              }
+              src={
+                heroSlides[
+                  currentSlide
+                ].image
+              }
+              alt=""
+              loading="eager"
+              decoding="async"
+              initial={{
+                opacity: 0,
+                scale: 0.94,
+              }}
+              animate={{
+                opacity: 1,
+                scale: 1,
+              }}
+              exit={{
+                opacity: 0,
+                scale: 0.94,
+              }}
+              transition={{
+                duration: 0.6,
+              }}
+              className="
+              relative
+              z-20
+
+              w-[320px]
+              sm:w-[430px]
+              lg:w-[500px]
+
+              object-contain
+
+              drop-shadow-[0_30px_60px_rgba(0,0,0,0.22)]
+              "
+            />
+          </AnimatePresence>
 
           {/* GLOW */}
 
